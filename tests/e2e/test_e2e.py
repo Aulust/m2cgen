@@ -34,6 +34,7 @@ HASKELL = pytest.mark.haskell
 RUBY = pytest.mark.ruby
 F_SHARP = pytest.mark.f_sharp
 REGRESSION = pytest.mark.regr
+REGRESSION_WITH_MISSING_VALUES = pytest.mark.regr_missing_val
 CLASSIFICATION = pytest.mark.clf
 
 
@@ -92,6 +93,14 @@ def regression_bounded(model, test_fraction=0.02):
         model,
         utils.get_bounded_regression_model_trainer(test_fraction),
         REGRESSION,
+    )
+
+
+def regression_with_missing_values(model, test_fraction=0.02):
+    return (
+        model,
+        utils.get_regression_model_with_missing_values(test_fraction),
+        REGRESSION_WITH_MISSING_VALUES,
     )
 
 
@@ -158,23 +167,31 @@ STATSMODELS_LINEAR_REGULARIZED_PARAMS = dict(method="elastic_net",
     [
         # LightGBM
         regression(lightgbm.LGBMRegressor(**LIGHTGBM_PARAMS)),
+        regression_with_missing_values(
+            lightgbm.LGBMRegressor(**LIGHTGBM_PARAMS)),
         classification(lightgbm.LGBMClassifier(**LIGHTGBM_PARAMS)),
         classification_binary(lightgbm.LGBMClassifier(**LIGHTGBM_PARAMS)),
 
         # LightGBM (DART)
         regression(lightgbm.LGBMRegressor(**LIGHTGBM_PARAMS_DART)),
+        regression_with_missing_values(
+            lightgbm.LGBMRegressor(**LIGHTGBM_PARAMS_DART)),
         classification(lightgbm.LGBMClassifier(**LIGHTGBM_PARAMS_DART)),
         classification_binary(lightgbm.LGBMClassifier(
             **LIGHTGBM_PARAMS_DART)),
 
         # LightGBM (GOSS)
         regression(lightgbm.LGBMRegressor(**LIGHTGBM_PARAMS_GOSS)),
+        regression_with_missing_values(
+            lightgbm.LGBMRegressor(**LIGHTGBM_PARAMS_GOSS)),
         classification(lightgbm.LGBMClassifier(**LIGHTGBM_PARAMS_GOSS)),
         classification_binary(lightgbm.LGBMClassifier(
             **LIGHTGBM_PARAMS_GOSS)),
 
         # LightGBM (RF)
         regression(lightgbm.LGBMRegressor(**LIGHTGBM_PARAMS_RF)),
+        regression_with_missing_values(
+            lightgbm.LGBMRegressor(**LIGHTGBM_PARAMS_RF)),
         classification(lightgbm.LGBMClassifier(**LIGHTGBM_PARAMS_RF)),
         classification_binary(lightgbm.LGBMClassifier(**LIGHTGBM_PARAMS_RF)),
 
@@ -549,6 +566,9 @@ STATSMODELS_LINEAR_REGULARIZED_PARAMS = dict(method="elastic_net",
         classification_binary(
             ensemble.RandomForestClassifier(**FOREST_PARAMS)),
     ],
+    [
+        (R, REGRESSION_WITH_MISSING_VALUES),
+    ]
 
     # Following is the list of extra tests for languages/models which are
     # not fully supported yet.

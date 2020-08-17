@@ -15,6 +15,7 @@ class JavaInterpreter(ImperativeToCodeInterpreter,
     # to adjustments in future.
     ast_size_check_frequency = 100
     ast_size_per_subroutine_threshold = 4600
+    subroutine_per_group_threshold = 15
 
     supported_bin_vector_ops = {
         ast.BinNumOpType.ADD: "addVectors",
@@ -55,7 +56,7 @@ class JavaInterpreter(ImperativeToCodeInterpreter,
             # Since we use SubroutinesMixin, we already have logic
             # of adding methods. We create first subroutine for incoming
             # expression and call `process_subroutine_queue` method.
-            self.enqueue_subroutine(self.function_name, expr)
+            self.enqueue_subroutine(self.function_name, 0, expr)
             self.process_subroutine_queue(top_cg)
 
             if self.with_linear_algebra:

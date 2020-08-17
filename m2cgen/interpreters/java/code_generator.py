@@ -27,8 +27,8 @@ class JavaCodeGenerator(CLikeCodeGenerator):
         self.add_code_line(f"package {package_name};")
 
     @contextlib.contextmanager
-    def class_definition(self, class_name):
-        self.add_class_def(class_name)
+    def class_definition(self, class_name, modifier="public"):
+        self.add_class_def(class_name, modifier)
         yield
         self.add_block_termination()
 

@@ -288,6 +288,7 @@ class LightGBMModelAssembler(BaseTreeBoostingAssembler):
             "gamma": self._exp_transform,
             "tweedie": self._exp_transform,
             "custom": super()._single_convert_output,
+            "lambdarank": super()._single_convert_output,
         }
         if self.objective_name not in supported_objectives:
             raise ValueError(

@@ -36,12 +36,14 @@ SUPPORTED_MODELS = {
     # LightGBM
     "lightgbm_LGBMClassifier": LightGBMModelAssembler,
     "lightgbm_LGBMRegressor": LightGBMModelAssembler,
+    "hhkardinal_LightGBMMMock": LightGBMModelAssembler,
 
     # XGBoost
     "xgboost_XGBClassifier": XGBoostModelAssemblerSelector,
     "xgboost_XGBRFClassifier": XGBoostModelAssemblerSelector,
     "xgboost_XGBRegressor": XGBoostModelAssemblerSelector,
     "xgboost_XGBRFRegressor": XGBoostModelAssemblerSelector,
+    "hhkardinal_XGBoostMock": XGBoostModelAssemblerSelector,
 
     # Sklearn SVM
     "sklearn_LinearSVC": SklearnLinearModelAssembler,

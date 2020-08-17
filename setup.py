@@ -33,7 +33,7 @@ setup(
     keywords="sklearn ml code-generation",
     python_requires=">=3.6",
     install_requires=[
-        "numpy",
+        "numpy==1.14.0",
     ],
     entry_points={
         "console_scripts": [

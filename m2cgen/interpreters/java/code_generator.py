@@ -6,7 +6,7 @@ from m2cgen.interpreters.code_generator import CLikeCodeGenerator
 class JavaCodeGenerator(CLikeCodeGenerator):
 
     scalar_output_type = "double"
-    vector_output_type = "double[]"
+    vector_output_type = "float[]"
 
     def add_class_def(self, class_name, modifier="public"):
         class_def = f"{modifier} class {class_name} {{"
